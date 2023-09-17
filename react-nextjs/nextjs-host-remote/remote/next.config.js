@@ -12,6 +12,10 @@ module.exports = {
                   exposes: {
                       './nextjs-remote-component': './components/nextjs-remote-component.js',
                   },
+                  remotes: {
+                      remote: 'remote@http://localhost:8081/_next/static/chunks/remoteEntry.js',
+                      host: 'host@http://localhost:8080/remoteEntry.js',
+                  },
                   shared: {},
                   filename: 'static/chunks/remoteEntry.js',
               }),

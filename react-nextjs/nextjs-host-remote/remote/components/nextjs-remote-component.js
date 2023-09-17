@@ -1,6 +1,7 @@
 import * as React from 'react';
 
 const NextjsRemoteComponent = () => {
+  console.log('Next.js remote component rendered');
   return (
     <nav
       style={{

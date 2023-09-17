@@ -1,7 +1,22 @@
 import Head from 'next/head';
 import Image from 'next/image';
 import styles from '../styles/Home.module.css';
-import NextjsRemoteComponent from './../components/nextjs-remote-component';
+
+/*
+This does not work. Next.js MF plugin usage is totally misleading
+https://www.npmjs.com/package/@module-federation/nextjs-mf
+ */
+import { lazy } from 'react';
+// const NextjsRemoteComponent = lazy(() => import('remote/nextjs-remote-component'));
+// const Nav = lazy(() => import('host/Nav'));
+
+import dynamic from 'next/dynamic';
+const NextjsRemoteComponent = dynamic(() => import('remote/nextjs-remote-component'), {
+  ssr: false,
+});
+const Nav = dynamic(() => import('host/Nav'), {
+  ssr: false,
+});
 
 export default function Home() {
   return (
@@ -13,6 +28,8 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
+        <Nav />
+        <NextjsRemoteComponent />
         <h1 className={styles.title}>
           Welcome to <a href="https://nextjs.org">Next.js!</a>
         </h1>
