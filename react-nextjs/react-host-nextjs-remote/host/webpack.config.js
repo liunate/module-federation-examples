@@ -3,11 +3,6 @@ const ModuleFederationPlugin = require('webpack').container.ModuleFederationPlug
 const deps = require('./package.json').dependencies;
 module.exports = {
   entry: './src/index',
-  entry: {
-    app: {
-      import: './src/index',
-    },
-  },
   cache: false,
 
   mode: 'development',
@@ -19,10 +14,15 @@ module.exports = {
 
   output: {
     publicPath: 'auto',
+    clean: true,
   },
 
   resolve: {
     extensions: ['.jsx', '.js', '.json', '.mjs'],
+    // import @module-federation/utilities
+    alias: {
+      'path': false,
+    },
   },
 
   module: {
@@ -50,14 +50,24 @@ module.exports = {
       name: 'host',
       filename: 'remoteEntry.js',
       remotes: {
-        remote: 'remote@http://localhost:8081/_next/static/chunks/remoteEntry.js',
+        remote: 'remote@http://127.0.0.1:8081/_next/static/chunks/remoteEntry.js',
+        host: 'host@http://127.0.0.1:8080/remoteEntry.js',
+        // Dataexplorer: `Dataexplorer@http://127.0.0.1:3000/app/data-explorer/_next/static/chunks/remoteEntryDataexplorer.js`,
       },
-      exposes: {},
+      exposes: {
+        './Nav': './src/components/Nav',
+      },
+      // shared: ['react', 'react-dom'],
       shared: {
         react: {
-          // Notice shared are NOT eager here.
-          requiredVersion: false,
+          // eager: true,
           singleton: true,
+          requiredVersion: deps.react,
+        },
+        'react-dom': {
+          // eager: true,
+          singleton: true,
+          requiredVersion: deps['react-dom'],
         },
       },
     }),

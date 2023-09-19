@@ -1,12 +1,9 @@
-import * as React from 'react';
-// import styles from '../styles/Home.module.css'
-// console.log(styles)
+import styles from '../styles/Home.module.css'
 
 const NextjsRemoteComponent = () => {
   return (
     <nav
       style={{
-        background: 'cadetblue',
         width: '100%',
         height: '100px',
         color: 'white',
@@ -16,8 +13,8 @@ const NextjsRemoteComponent = () => {
         alignItems: 'center',
         fontSize: '24px',
       }}
-    >
-      Hello from Remote Nextjs component hosted on localhost:8081
+     className={styles.nate}>
+      Hello from Next.js component hosted on localhost:8081
     </nav>
   );
 };

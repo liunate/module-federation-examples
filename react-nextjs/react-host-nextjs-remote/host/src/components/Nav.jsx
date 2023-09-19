@@ -15,7 +15,7 @@ const Nav = () => {
         fontSize: '24px',
       }}
     >
-      This component is from the Host React App hosted at localhost:8081
+      This component NAV is from the host React App hosted at localhost:8080
     </nav>
   );
 };

@@ -1,8 +1,11 @@
 import Head from 'next/head';
 import Image from 'next/image';
 import styles from '../styles/Home.module.css';
+// import NextjsRemoteComponent from '../components/nextjs-remote-component'
+import lodash from 'lodash'
 
 export default function Home() {
+  console.log(`lodash`, lodash.find(([1, 2, 3]), (item) => item === 1))
   return (
     <div className={styles.container}>
       <Head>
@@ -11,7 +14,11 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className={styles.main}>
+      <h1>{lodash.find(([1, 2, 3]), (item) => item === 1)}</h1>
+
+      {/* <NextjsRemoteComponent /> */}
+
+      <main className={styles.nate} >
         <h1 className={styles.title}>
           Welcome to <a href="https://nextjs.org">Next.js!</a>
         </h1>

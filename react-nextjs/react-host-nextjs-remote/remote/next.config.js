@@ -1,4 +1,4 @@
-const NextFederationPlugin = require('@module-federation/nextjs-mf/lib/NextFederationPlugin');
+const NextFederationPlugin = require('@module-federation/nextjs-mf')
 
 module.exports = {
   webpack(config, options) {
@@ -6,26 +6,22 @@ module.exports = {
       config.plugins.push(
         new NextFederationPlugin({
           name: 'remote',
-          remotes: {},
           filename: 'static/chunks/remoteEntry.js',
+          remotes: {
+            remote: 'remote@http://127.0.0.1:8081/_next/static/chunks/remoteEntry.js',
+            host: 'host@http://127.0.0.1:8080/remoteEntry.js',
+            // Dataexplorer: `Dataexplorer@http://127.0.0.1:3000/app/data-explorer/_next/static/chunks/remoteEntryDataexplorer.js`,
+          },
           exposes: {
             './nextjs-remote-component': './components/nextjs-remote-component.js',
-            './nextjs-remote-page': './pages/index.js',
           },
-          shared: {
-            react: {
-              requiredVersion: false,
-              singleton: true,
-            },
-          },
+          shared: {},
           extraOptions: {
-            skipSharingNextInternals: true,
+            // skipSharingNextInternals: true,
           },
         }),
       );
     }
     return config;
   },
-  // your original next.config.js export
-  reactStrictMode: true,
 };
